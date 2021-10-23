@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../book.service';
 
 @Component({
   selector: 'app-book-list',
@@ -7,16 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookListComponent implements OnInit {
 
-  bookList = [
-    { id: 1, name: "Harry Potter 1", price: 100, page: 20 },
-    { id: 2, name: "Harry Potter 2", price: 200, page: 320 },
-    { id: 3, name: "Harry Potter 3", price: 300, page: 420 },
-    { id: 4, name: "Harry Potter 4", price: 400, page: 50 },
-  ]
+  bookList: any[]
 
-  constructor() { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit() {
+    this.bookService.list().subscribe({
+      next: (bookList) => {
+        this.bookList = bookList;
+      },
+      error: (error) => {
+        console.error("error load list!!")
+      }
+    })
   }
 
 }

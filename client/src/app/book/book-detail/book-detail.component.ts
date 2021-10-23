@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BookService } from '../book.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -6,10 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
+  bookId: number = this.route.snapshot.params.id
+  book: any
 
-  constructor() { }
+  constructor(
+    private bookService: BookService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.bookService.load(this.bookId)
+      .subscribe({
+        next: (result) => {
+          this.book = result
+        }
+      })
+  }
+
+  deleteBook() {
+    this.bookService.delete(this.bookId).subscribe({
+      next: (result) => {
+        alert(`delete book id ${result.id} success !!`)
+      }
+    })
   }
 
 }
