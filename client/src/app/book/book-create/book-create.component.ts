@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { BookFormService } from '../book-form.service';
 import { BookService } from '../book.service';
 
 @Component({
@@ -12,13 +13,10 @@ export class BookCreateComponent implements OnInit {
   bookForm: FormGroup;
   constructor(
     private bookService: BookService,
-    private router: Router
+    private router: Router,
+    private bookFormService: BookFormService,
   ) {
-    this.bookForm = new FormGroup({
-      name: new FormControl(""),
-      price: new FormControl(null),
-      page: new FormControl(null)
-    })
+    this.bookForm = this.bookFormService.toFormGroup()
   }
 
   ngOnInit() {

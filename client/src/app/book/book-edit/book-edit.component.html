@@ -1,17 +1,6 @@
 <p>book-edit works!</p>
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-  <label>Name: </label>
-  <input type="text" formControlName="name" />
-  <br />
-
-  <label>Price: </label>
-  <input type="number" formControlName="price" />
-  <br />
-
-  <label>Page: </label>
-  <input type="number" formControlName="page" />
-  <br />
-
-  <button type="submit">Submit</button>
-  <a (click)="deleteBook()">Delete</a>
+  <app-book-form [bookForm]="bookForm"></app-book-form>
+  <button type="submit" data-testid="edit-book">Update</button>
+  <a (click)="deleteBook()" data-testid="delete-book">Delete</a>
 </form>

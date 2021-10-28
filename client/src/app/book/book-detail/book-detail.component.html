@@ -1,6 +1,8 @@
 <p>book-detail works!</p>
-<a (click)="deleteBook()">Delete</a>
-<button [routerLink]="['/book/edit', book.id]">Edit</button>
+<a (click)="deleteBook()" data-testid="delete-book">Delete</a>
+<button [routerLink]="['/book/edit', book.id]" data-testid="edit-book">
+  Edit
+</button>
 <pre>
     {{ book | json }}
 </pre>

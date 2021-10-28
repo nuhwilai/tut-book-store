@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,32 +13,27 @@ export class BookService {
   ) { }
 
   list() {
-    return this.httpClient.get("http://localhost:3000/api/books")
-      .pipe(
-        map((result: any) => {
-          console.log(result)
-          return result.data
-        }
-        )
-      )
+    return this.httpClient.get(environment.serverApiUrl + "/books").pipe(this.mapHandler())
   }
 
   load(id: number) {
-    return of({ id: 1, name: "Harry Potter 1", price: 100, page: 20 })
+    return this.httpClient.get(environment.serverApiUrl + "/books/" + id).pipe(this.mapHandler())
   }
 
   create(data: any) {
-    return of({ id: 5, name: "Harry Potter 4", price: 400, page: 50 })
+    return this.httpClient.post(environment.serverApiUrl + "/books", data).pipe(this.mapHandler())
   }
 
   update(id: number, data: any) {
-    return of({ id: 1, name: "Harry Potter 1", price: 100, page: 20 })
+    return this.httpClient.put(environment.serverApiUrl + "/books/" + id, data).pipe(this.mapHandler())
   }
 
   delete(id: number) {
-    return of({
-      id: 1
-    })
+    return this.httpClient.delete(environment.serverApiUrl + "/books/" + id).pipe(this.mapHandler())
+  }
+
+  private mapHandler() {
+    return map((result: any) => result.data)
   }
 
 }

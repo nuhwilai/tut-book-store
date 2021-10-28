@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BookFormService } from '../book-form.service';
 import { BookService } from '../book.service';
 
 @Component({
@@ -15,13 +16,10 @@ export class BookEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private bookService: BookService
+    private bookService: BookService,
+    private bookFormService: BookFormService
   ) {
-    this.bookForm = new FormGroup({
-      name: new FormControl(""),
-      price: new FormControl(null),
-      page: new FormControl(null)
-    })
+    this.bookForm = this.bookFormService.toFormGroup()
   }
 
   ngOnInit() {
@@ -51,6 +49,7 @@ export class BookEditComponent implements OnInit {
     this.bookService.delete(this.bookId).subscribe({
       next: (result) => {
         alert(`delete book id ${result.id} success !!`)
+        this.router.navigate(["/book"]);
       }
     })
   }

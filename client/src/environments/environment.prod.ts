@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serverApiUrl: "https://book-store.com/api"
 };

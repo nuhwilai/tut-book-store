@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../book.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class BookDetailComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
+    private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class BookDetailComponent implements OnInit {
     this.bookService.delete(this.bookId).subscribe({
       next: (result) => {
         alert(`delete book id ${result.id} success !!`)
+        this.router.navigate(["/book"]);
       }
     })
   }
