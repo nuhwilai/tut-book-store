@@ -1,0 +1,24 @@
+<p>book-list works!</p>
+<button [routerLink]="['create']">Create</button>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Page</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of bookList">
+      <td>{{ book.name }}</td>
+      <td>{{ book.price }}</td>
+      <td>{{ book.page }}</td>
+      <td>
+        <button pButton [routerLink]="['edit', book.id]" data-testid="edit-book" label="Edit">
+          
+        </button>
+        <button [routerLink]="['detail', book.id]" data-testid="show-book">
+          Show
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

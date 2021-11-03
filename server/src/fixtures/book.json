@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Harry Potter and the Philosopher's Stone",
+    "page": 223,
+    "price": 375.25,
+    "author": 1
+  },
+  {
+    "id": 2,
+    "name": "Harry Potter and the Chamber of Secrets ",
+    "page": 251,
+    "price": 375,
+    "author": 1
+  },
+  {
+    "id": 3,
+    "name": "Sapiens A Brief History of Humankind",
+    "page": 608,
+    "price": 503,
+    "author": 2
+  }
+]

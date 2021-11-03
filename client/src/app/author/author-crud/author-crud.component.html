@@ -1,0 +1,28 @@
+<table>
+  <thead>
+    <th>Name</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let author of authorList">
+      <td>{{ author.name }}</td>
+      <td>
+        <button data-testid="edit-author" (click)="showModal(author)">
+          Edit
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- dialog zone -->
+<div class="modal" [ngStyle]="{ display: isShowModal ? 'block' : 'none' }">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="hideModal()">&times;</span>
+    <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+      <app-author-form [authorForm]="authorForm"></app-author-form>
+      <button type="submit" data-testid="edit-author">Update</button>
+      <a (click)="deleteAuthor()" data-testid="delete-author">Delete</a>
+    </form>
+  </div>
+</div>
