@@ -1,6 +1,11 @@
 <table>
   <thead>
     <th>Name</th>
+    <th>
+      <button data-testid="edit-author" (click)="showModal()">
+        Create
+      </button>
+    </th>
   </thead>
   <tbody>
     <tr *ngFor="let author of authorList">
@@ -21,8 +26,13 @@
     <span class="close" (click)="hideModal()">&times;</span>
     <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
       <app-author-form [authorForm]="authorForm"></app-author-form>
-      <button type="submit" data-testid="edit-author">Update</button>
-      <a (click)="deleteAuthor()" data-testid="delete-author">Delete</a>
+      <ng-container *ngIf="!selectedAuthor">
+        <button type="submit" data-testid="create-author">Create</button>
+      </ng-container>
+      <ng-container *ngIf="selectedAuthor">
+        <button type="submit" data-testid="edit-author">Update</button>
+        <a (click)="deleteAuthor()" data-testid="delete-author">Delete</a>
+      </ng-container>
     </form>
   </div>
 </div>

@@ -12,8 +12,8 @@
       <td>{{ book.price }}</td>
       <td>{{ book.page }}</td>
       <td>
-        <button pButton [routerLink]="['edit', book.id]" data-testid="edit-book" label="Edit">
-          
+        <button [routerLink]="['edit', book.id]" data-testid="edit-book" >
+          Edit
         </button>
         <button [routerLink]="['detail', book.id]" data-testid="show-book">
           Show

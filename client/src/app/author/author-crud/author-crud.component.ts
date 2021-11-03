@@ -14,6 +14,7 @@ export class AuthorCrudComponent implements OnInit {
   authorForm: FormGroup;
   selectedAuthor: any;
   isShowModal: boolean = false;
+  isCreate: boolean = false;
 
   constructor(
     private authorService: AuthorService,
@@ -46,17 +47,38 @@ export class AuthorCrudComponent implements OnInit {
     });
   }
 
-  showModal(author: any) {
-    this.loadAuthor(author.id);
+  showModal(author?: any) {
+    if (author) {
+      this.loadAuthor(author.id);
+    }
     this.isShowModal = true;
   }
 
   hideModal() {
     this.isShowModal = false;
+    this.selectedAuthor = null
     this.authorForm.reset();
   }
 
   onSubmit() {
+    if (!this.selectedAuthor) {
+      this.createAuthor();
+    } else {
+      this.editAuthor();
+    }
+  }
+
+  createAuthor() {
+    this.authorService.create(this.authorForm.value).subscribe({
+      next: (result) => {
+        alert("create: " + JSON.stringify(result));
+        this.hideModal();
+        this.loadAuthorList();
+      },
+    });
+  }
+
+  editAuthor() {
     this.authorService
       .update(this.selectedAuthor.id, this.authorForm.value)
       .subscribe({
