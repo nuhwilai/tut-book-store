@@ -1,13 +1,14 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
+import { ButtonModule } from "primeng/button";
+import { TableModule } from "primeng/table";
 import { BookCreateComponent } from "./book-create/book-create.component";
 import { BookDetailComponent } from "./book-detail/book-detail.component";
 import { BookEditComponent } from "./book-edit/book-edit.component";
 import { BookFormComponent } from "./book-form/book-form.component";
 import { BookListComponent } from "./book-list/book-list.component";
 import { BookRoutingModule } from "./book-routing.module";
-
 @NgModule({
   declarations: [
     BookListComponent,
@@ -16,6 +17,12 @@ import { BookRoutingModule } from "./book-routing.module";
     BookDetailComponent,
     BookFormComponent,
   ],
-  imports: [CommonModule, BookRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    BookRoutingModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    TableModule,
+  ],
 })
 export class BookModule {}

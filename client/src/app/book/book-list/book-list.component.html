@@ -1,24 +1,34 @@
-<p>book-list works!</p>
-<button [routerLink]="['create']">Create</button>
-<table>
-  <thead>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Page</th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of bookList">
+<p-table [value]="bookList" styleClass="p-datatable-gridlines" paginator="true" rows="2">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Page</th>
+      <th>
+        <button pButton type="button" label="Create" icon="pi pi-plus" [routerLink]="['create']"></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-book>
+    <tr>
       <td>{{ book.name }}</td>
       <td>{{ book.price }}</td>
       <td>{{ book.page }}</td>
       <td>
-        <button [routerLink]="['edit', book.id]" data-testid="edit-book" >
-          Edit
-        </button>
-        <button [routerLink]="['detail', book.id]" data-testid="show-book">
-          Show
-        </button>
+        <div class="flex w-full justify-content-between">
+          <button pButton type="button" label="Edit" icon="pi pi-pencil" [routerLink]="['edit', book.id]"
+            data-testid="edit-book"></button>
+          <button pButton type="button" label="Show" icon="pi pi-info" [routerLink]="['detail', book.id]"
+            data-testid="show-book"></button>
+        </div>
       </td>
     </tr>
-  </tbody>
-</table>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colSpan="4">
+        No records found
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
