@@ -20,8 +20,8 @@
 </table>
 
 <!-- dialog zone -->
-<div class="modal" [ngStyle]="{ display: isShowModal ? 'block' : 'none' }">
-  <!-- Modal content -->
+<!-- <div class="modal" [ngStyle]="{ display: isShowModal ? 'block' : 'none' }">
+  Modal content
   <div class="modal-content">
     <span class="close" (click)="hideModal()">&times;</span>
     <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
@@ -35,4 +35,17 @@
       </ng-container>
     </form>
   </div>
-</div>
+</div> -->
+
+<p-dialog header="Author Form" [(visible)]="isShowModal">
+  <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
+    <app-author-form [authorForm]="authorForm"></app-author-form>
+    <ng-container *ngIf="!selectedAuthor">
+      <button type="submit" data-testid="create-author">Create</button>
+    </ng-container>
+    <ng-container *ngIf="selectedAuthor">
+      <button type="submit" data-testid="edit-author">Update</button>
+      <a (click)="deleteAuthor()" data-testid="delete-author">Delete</a>
+    </ng-container>
+  </form>
+</p-dialog>
