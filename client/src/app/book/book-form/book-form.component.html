@@ -1,13 +1,75 @@
 <ng-container [formGroup]="bookForm">
-  <label>Name: </label>
-  <input type="text" formControlName="name" data-testid="fname" />
-  <br />
+  <div class="p-fluid grid">
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="name">Name {{f?.name?.errors | json}}</label>
+      <input id="name" pInputText type="text" formControlName="name" data-testid="fname" [ngClass]="{
+          'ng-invalid ng-dirty': isSubmitted && f?.name?.errors
+        }" />
+      <small id="name-error" class="p-error" *ngIf="isSubmitted && f.name.errors">Name is required.</small>
+    </div>
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="price">Price</label>
+      <p-inputNumber id="price" formControlName="price" data-testid="fprice" [showButtons]="true" [min]="0"
+        [class.ng-invalid]="isSubmitted && f?.price?.errors" [class.ng-dirty]="isSubmitted && f?.price?.errors">
+      </p-inputNumber>
+      <small id="price-required-error" class="p-error" *ngIf="isSubmitted && f?.price?.errors?.required">Price is
+        required.</small>
+      <small id="price-min-error" class="p-error" *ngIf="isSubmitted && f.price?.errors?.min">Price should more than
+        0</small>
+    </div>
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="page">Page</label>
+      <p-inputNumber id="page" formControlName="page" data-testid="fpage" [showButtons]="true">
+      </p-inputNumber>
+    </div>
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="category">Category</label>
+      <div class="formgroup-inline">
+        <div class="field-checkbox">
+          <p-checkbox inputId="category-sport" value="Sport" [formControl]="bookForm.controls.category" [ngClass]="{
+            'ng-invalid ng-dirty': isSubmitted && f?.category?.errors
+          }">
+          </p-checkbox>
+          <label for="category-sport">Sport</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox inputId="category-news" value="News" [formControl]="f.category" [ngClass]="{
+            'ng-invalid ng-dirty': isSubmitted && f?.category?.errors
+          }">
+          </p-checkbox>
+          <label for="category-news">News</label>
+        </div>
+        <div class="field-checkbox">
+          <p-checkbox inputId="category-cartoon" value="Cartoon" [formControl]="f.category" [ngClass]="{
+            'ng-invalid ng-dirty': isSubmitted && f?.category?.errors
+          }">
+          </p-checkbox>
+          <label for="category-cartoon">Cartoon</label>
+        </div>
+      </div>
+      <small id="category-required-error" class="p-error" *ngIf="isSubmitted && f?.category?.errors?.required">Category
+        is
+        required.</small>
+    </div>
 
-  <label>Price: </label>
-  <input type="number" formControlName="price" data-testid="fprice" />
-  <br />
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="publishDate">Publish Date</label>
+      <p-calendar formControlName="publishDate" [ngClass]="{
+        'ng-invalid ng-dirty': isSubmitted && f?.publishDate?.errors
+      }"></p-calendar>
+      <small id="publishDate-required-error" class="p-error"
+        *ngIf="isSubmitted && f?.publishDate?.errors?.required">Publish
+        Date is
+        required.</small>
+    </div>
 
-  <label>Page: </label>
-  <input type="number" formControlName="page" data-testid="fpage" />
-  <br />
+    <div class="field p-col-12 sm:col-12 md:col-6 lg:col-6 xl:col-6">
+      <label for="color">Color</label>
+      <p-dropdown [options]="colorOptions" formControlName="color" optionLabel="label" [ngClass]="{
+        'ng-invalid ng-dirty': isSubmitted && f?.color?.errors
+      }"></p-dropdown>
+      <small id="color-required-error" class="p-error" *ngIf="isSubmitted && f?.color?.errors?.required">Color is
+        required.</small>
+    </div>
+  </div>
 </ng-container>

@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Injectable } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class BookFormService {
-
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   toFormGroup() {
     return this.fb.group({
-      name: [""],
-      price: [null],
-      page: [null]
-    })
+      name: ["", Validators.required],
+      price: [null, [Validators.required, Validators.min(0)]],
+      page: [null],
+      category: [null, Validators.required],
+      color: [null, Validators.required],
+      publishDate: [null, Validators.required],
+    });
   }
 }

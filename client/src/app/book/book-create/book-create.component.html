@@ -1,5 +1,5 @@
 <p>book-create works!</p>
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-  <app-book-form [bookForm]="bookForm"></app-book-form>
+  <app-book-form [bookForm]="bookForm" [isSubmitted]="isSubmitted"></app-book-form>
   <button type="submit" data-testid="create-book">Submit</button>
 </form>

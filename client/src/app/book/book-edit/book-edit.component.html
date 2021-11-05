@@ -1,6 +1,5 @@
-<p>book-edit works!</p>
 <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
-  <app-book-form [bookForm]="bookForm"></app-book-form>
+  <app-book-form [bookForm]="bookForm" [isSubmitted]="isSubmitted"></app-book-form>
   <button type="submit" data-testid="edit-book">Update</button>
   <a (click)="deleteBook()" data-testid="delete-book">Delete</a>
 </form>
