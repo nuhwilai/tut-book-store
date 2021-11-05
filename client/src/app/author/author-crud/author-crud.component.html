@@ -37,7 +37,7 @@
   </div>
 </div> -->
 
-<p-dialog header="Author Form" [(visible)]="isShowModal">
+<p-dialog header="Author Form" [(visible)]="isShowModal" (onHide)="hideModal()">
   <form [formGroup]="authorForm" (ngSubmit)="onSubmit()">
     <app-author-form [authorForm]="authorForm"></app-author-form>
     <ng-container *ngIf="!selectedAuthor">
